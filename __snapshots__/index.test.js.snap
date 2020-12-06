@@ -1,8 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`custom snapshot matcher works if async 1`] = `"async snapshot #1"`;
+exports[`custom snapshot matcher works if async 1`] = `
+Object {
+  "result": "async snapshot #1",
+  "slow": true,
+}
+`;
 
-exports[`custom snapshot matcher works if async 2`] = `"async snapshot #2"`;
+exports[`custom snapshot matcher works if async 2`] = `
+Object {
+  "result": "async snapshot #2",
+  "slow": true,
+}
+`;
 
 exports[`custom snapshot matcher works if sync 1`] = `"sync snapshot #1"`;
 
