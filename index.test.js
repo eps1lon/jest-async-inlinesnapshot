@@ -1,28 +1,13 @@
 const { toMatchSnapshot, toMatchInlineSnapshot } = require("jest-snapshot");
 
-async function toMatchSpeechInlineSnapshotAsync(fn, expectedSnapshot) {
-  // Jest uses the stacktraces to find the callsite.
-  // For async stacktraces it'll point to the wrapped call
-  // i.e. every `toMatchSpeechInlineSnapshotAsync` will point to the same call triggering "Jest: Multiple inline snapshots for the same call are not supported."
-  this.error = new Error();
-  const result = await fn();
-  if (expectedSnapshot === undefined) {
-    return toMatchInlineSnapshot.call(this, result);
-  }
-  return toMatchInlineSnapshot.call(this, result, expectedSnapshot);
-}
-
 expect.extend({
-  async toMatchSpeechInlineSnapshotAsync(fn, expectedSnapshot) {
+  async toMatchSpeechInlineSnapshotAsync(fn, ...rest) {
     // Jest uses the stacktraces to find the callsite.
     // For async stacktraces it'll point to the wrapped call
     // i.e. every `toMatchSpeechInlineSnapshotAsync` will point to the same call triggering "Jest: Multiple inline snapshots for the same call are not supported."
     this.error = new Error();
     const result = await fn();
-    if (expectedSnapshot === undefined) {
-      return toMatchInlineSnapshot.call(this, result);
-    }
-    return toMatchInlineSnapshot.call(this, result, expectedSnapshot);
+    return toMatchInlineSnapshot.call(this, result, ...rest);
   },
   toMatchSpeechInlineSnapshot(fn, ...args) {
     const result = fn();
