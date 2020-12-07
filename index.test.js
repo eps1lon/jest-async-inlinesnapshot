@@ -70,17 +70,12 @@ describe("custom inline snapshot matcher", () => {
   it("works if async", async () => {
     await expect(async () => {
       return "async inline snapshot #1";
-    }).toMatchSpeechInlineSnapshotAsync(`
-            Object {
-              "result": "async inline snapshot #1",
-              "slow": true,
-            }
-          `);
+    }).toMatchSpeechInlineSnapshotAsync();
     await expect(async () => {
       return "async inline snapshot #2";
     }).toMatchSpeechInlineSnapshotAsync(`
             Object {
-              "result": "async inline snapshot #2",
+              "result": "async inline snapshot #?",
               "slow": true,
             }
           `);
